@@ -50,7 +50,7 @@ class TestsMainPage:
         with allure.step('Второй клик по заголовку столбца "First Name"'):
             main_page.click_element(Locators.LCTR_SORT_FIRST_NAME)
 
-        customers_del_btns = main_page.get_customers_del_btns(Locators.LCTR_CUSTOMERS_TABLE)
+        customers_del_btns = main_page.get_customers_del_btns()
         sorted_names = sorted(customers_del_btns.keys(), key=str.lower)
         assert sorted_names == list(customers_del_btns.keys())
 
@@ -61,13 +61,13 @@ class TestsMainPage:
         main_page = MainPage(browser)
 
         with allure.step('Поиск клиента для удаления'):
-            customers_del_btns = main_page.get_customers_del_btns(Locators.LCTR_CUSTOMERS_TABLE)
+            customers_del_btns = main_page.get_customers_del_btns()
             name_to_delete = get_name_to_delete(customers_del_btns.keys())
 
         with allure.step('Удаление выбранного клиента'):
             customers_del_btns[name_to_delete].click()
 
-        assert name_to_delete not in main_page.get_customers_del_btns(Locators.LCTR_CUSTOMERS_TABLE)
+        assert name_to_delete not in main_page.get_customers_del_btns()
 
 
 

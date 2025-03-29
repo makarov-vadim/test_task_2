@@ -28,10 +28,11 @@ class MainPage(BasePage):
         search_field.send_keys(word)
         return search_field
 
-    def get_customers_del_btns(self, locator):
+    def get_customers_del_btns(self):
         '''Метод, который считывает таблицу "Customer" и возвращает словарь,
         в котором ключом является имя (First Name) клиента,
         а значением - клавиша "Delete", удаляющая этого клиента из таблицы "Customer"'''
+        locator = Locators.LCTR_CUSTOMERS_TABLE
         customers_del_btns = {}
 
         rows = len(self.find_elements((locator[0], f'{locator[1]}')))
