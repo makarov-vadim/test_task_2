@@ -14,6 +14,6 @@ jobs:
 
    - name: Run tests
      run: coverage run test_task_2/tests/main_page_test.py
-#
-#   - name: Tests report
-#     run: coverage report
+
+   - name: Tests report
+     run: coverage report
