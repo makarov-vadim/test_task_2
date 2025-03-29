@@ -13,7 +13,13 @@ jobs:
      run: pip install -r requirements.txt
 
    - name: Run tests
-     run: coverage run test_task_2/tests/main_page_test.py
+     run: pytest --alluredir reports
 
-   - name: Tests report
-     run: coverage report
+#   - name: Tests report
+#     run: coverage report
+
+#   - name: Run tests
+#     run: coverage run test_task_2/tests/main_page_test.py
+#
+#   - name: Tests report
+#     run: coverage report
