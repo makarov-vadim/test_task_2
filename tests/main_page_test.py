@@ -5,7 +5,6 @@ from pages.main_page import Locators, MainPage
 from re import  match
 
 
-@allure.feature("Test Cases")
 class TestsMainPage:
     '''Класс, описывающий автотест страницы MainPage'''
     @allure.feature("Test Cases")
