@@ -9,6 +9,8 @@ from re import  match
 @allure.feature('Test Cases')
 class TestsMainPage:
     '''Класс, описывающий автотест страницы MainPage'''
+    @allure.epic('Test_UI')
+    @allure.feature('Test Cases')
     @allure.story('Создание клиента (Add Customer)')
     @allure.step('Шаги')
     def test_case_1(self, browser):
@@ -36,6 +38,8 @@ class TestsMainPage:
         alert_obj.accept()
         assert bool(match(r'Customer added successfully', msg))
 
+    @allure.epic('Test_UI')
+    @allure.feature('Test Cases')
     @allure.story('Сортировка клиентов по имени (First Name)')
     @allure.step('Шаги')
     def test_case_2(self, browser):
@@ -54,6 +58,8 @@ class TestsMainPage:
         sorted_names = sorted(customers_del_btns.keys(), key=str.lower)
         assert sorted_names == list(customers_del_btns.keys())
 
+    @allure.epic('Test_UI')
+    @allure.feature('Test Cases')
     @allure.story('Удаление клиента')
     @allure.step('Шаги')
     def test_case_3(self, browser):
