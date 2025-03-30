@@ -5,11 +5,9 @@ from pages.main_page import Locators, MainPage
 from re import  match
 
 
-@allure.epic("TestsMainPage")
 @allure.feature("Test Cases")
 class TestsMainPage:
     '''Класс, описывающий автотест страницы MainPage'''
-    @allure.epic("TestsMainPage")
     @allure.feature("Test Cases")
     @allure.story("Создание клиента Add Customer")
     def test_case_1(self, browser):
@@ -37,7 +35,6 @@ class TestsMainPage:
         alert_obj.accept()
         assert bool(match(r'Customer added successfully', msg))
 
-    @allure.epic("TestsMainPage")
     @allure.feature("Test Cases")
     @allure.story("Сортировка клиентов по имени First Name")
     def test_case_2(self, browser):
@@ -56,7 +53,6 @@ class TestsMainPage:
         sorted_names = sorted(customers_del_btns.keys(), key=str.lower)
         assert sorted_names == list(customers_del_btns.keys())
 
-    @allure.epic("TestsMainPage")
     @allure.feature("Test Cases")
     @allure.story("Удаление клиента")
     def test_case_3(self, browser):
