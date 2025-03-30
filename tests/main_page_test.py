@@ -9,8 +9,6 @@ from re import  match
 @allure.feature('Test Cases')
 class TestsMainPage:
     '''Класс, описывающий автотест страницы MainPage'''
-    @allure.epic('Test_UI')
-    @allure.feature('Test Cases')
     @allure.story('Создание клиента (Add Customer)')
     @allure.step('Шаги')
     def test_case_1(self, browser):
