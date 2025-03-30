@@ -26,18 +26,3 @@ https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
 
 # Тест-кейсы
 Описание тесткейсов находится в каталоге testcases
-
-# Требования
-Все необходимые модули прописаны в requirements.txt  
-Установка:  
-pip install -r requirements.txt
-
-# Запуск и отчет
-### Запустить автотесты можно с помощью команды:  
-pytest --alluredir reports
-
-### Ознакомиться с отчетом можно с помощью команды:  
-Set-Alias allure ```{allure.bat path}```  
-allure serve .\reports  
-
-где ```{allure.bat path}``` - путь до файла allure.bat
