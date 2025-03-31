@@ -32,7 +32,7 @@ class TestsMainPage:
         main_page.sort_by_first_name()
 
         customers_names = main_page.get_customers_names()
-        sorted_names = sorted(customers_names, key=lambda name: name.lower, reverse=True)
+        sorted_names = sorted(customers_names, key=lambda name: name.lower(), reverse=True)
         assert sorted_names == customers_names, "Клиенты не отсортированы"
 
     @allure.story("Удаление клиента")
