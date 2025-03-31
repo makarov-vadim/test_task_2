@@ -38,23 +38,12 @@ class TestsMainPage:
     @allure.story("Удаление клиента")
     def test_case_3(self, browser):
         """Тест-кейс 3. Удаление клиента"""
-        # main_page = MainPage(browser)
-        #
-        # customers_del_btns = main_page.get_customers_del_btns()
-        # name_to_delete = get_name_to_delete(customers_del_btns.keys())
-        #
-        # customers_del_btns[name_to_delete].click()
-        #
-        # assert name_to_delete not in main_page.get_customers_del_btns()
-
-
         main_page = MainPage(browser)
 
         customers_names = main_page.get_customers_names()
         name_to_delete = get_name_to_delete(customers_names)
 
-        delete_btn = main_page.delete_customer(name_to_delete)
-        delete_btn.click()
+        main_page.delete_customer(name_to_delete)
 
         assert name_to_delete not in main_page.get_customers_names(), f"Клиент {name_to_delete} не удален"
 
