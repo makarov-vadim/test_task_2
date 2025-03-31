@@ -15,5 +15,5 @@ def get_name_to_delete(names:list[str]) -> str:
     '''Функция, возвращающая элемент списка (строку), который имеет длину равную
     среднему арифметическому длин всех элементов"'''
     avg_len = sum(map(len, names)) / len(names)
-    name = min(names, key=lambda name: abs(avg_len - len(name)))
-    return name
+    result_name = min(names, key=lambda name: abs(avg_len - len(name)))
+    return result_name

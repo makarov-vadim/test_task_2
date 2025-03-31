@@ -79,7 +79,7 @@ class MainPage(BasePage):
             first_name = self.find_element((locator[0], f'{locator[1]}[{r}]/td[{1}]')).text
             if first_name == name_to_delete:
                 delete_btn = self.find_element((locator[0], f'{locator[1]}[{r}]/td[{columns}]/button'))
-                delete_btn.click()
+                return delete_btn
 
 
     def get_customers_del_btns(self):
