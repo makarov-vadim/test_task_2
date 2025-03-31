@@ -1,6 +1,7 @@
 from re import match
 
 import allure
+import pytest
 
 from helpers.help_functions import get_name_to_delete
 from pages.main_page import MainPage
@@ -8,17 +9,21 @@ from pages.main_page import MainPage
 
 @allure.epic("TestsMainPage")
 @allure.feature("Test Cases")
+@pytest.mark.usefixtures("main_page")
 class TestsMainPage:
     """Класс, описывающий автотест страницы MainPage"""
+    def __init__(self, browser):
+        self.main_page = MainPage(browser)
+
     @allure.story("Создание клиента Add Customer")
     def test_case_1(self, browser) -> None:
         """Тест-кейс 1. Создание клиента (Add Customer)"""
-        main_page = MainPage(browser)
-        main_page.go_to_site()
+        # main_page = MainPage(browser)
+        self.main_page.go_to_site()
 
-        main_page.open_tab_add_customer()
-        main_page.add_customer()
-        alert_text = main_page.read_alert()
+        self.main_page.open_tab_add_customer()
+        self.main_page.add_customer()
+        alert_text = self.main_page.read_alert()
 
         assert bool(match(r'Customer added successfully', alert_text)), "Клиент не добавлен"
 
