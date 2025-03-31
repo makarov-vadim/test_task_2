@@ -11,20 +11,19 @@ from pages.main_page import MainPage
 class TestsMainPage:
     """Класс, описывающий автотест страницы MainPage"""
     @allure.story("Создание клиента Add Customer")
-    def test_case_1(self, browser):
+    def test_case_1(self, browser) -> None:
         """Тест-кейс 1. Создание клиента (Add Customer)"""
         main_page = MainPage(browser)
         main_page.go_to_site()
 
         main_page.open_tab_add_customer()
-        main_page.filling_fields()
-        main_page.click_add_customer()
+        main_page.add_customer()
         alert_text = main_page.read_alert()
 
         assert bool(match(r'Customer added successfully', alert_text)), "Клиент не добавлен"
 
     @allure.story("Сортировка клиентов по имени First Name")
-    def test_case_2(self, browser):
+    def test_case_2(self, browser) -> None:
         """Тест-кейс 2. Сортировка клиентов по имени (First Name)"""
         main_page = MainPage(browser)
 
@@ -36,7 +35,7 @@ class TestsMainPage:
         assert sorted_names == customers_names, "Клиенты не отсортированы"
 
     @allure.story("Удаление клиента")
-    def test_case_3(self, browser):
+    def test_case_3(self, browser) -> None:
         """Тест-кейс 3. Удаление клиента"""
         main_page = MainPage(browser)
 

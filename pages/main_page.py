@@ -1,4 +1,8 @@
+from typing import Any
+
+import allure
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
 
 from config.config import URLS
 from helpers.help_functions import get_first_name, get_post_code
@@ -6,7 +10,7 @@ from pages.base_page import BasePage
 
 
 class Locators:
-    '''Класс, описывающий локаторы для поиска необходимых элементов'''
+    """Класс, описывающий локаторы для поиска необходимых элементов"""
     # ПОМЕНЯТЬ ЛОКАТОРЫ
     LCTR_TAB_ADD_CUSTOMER = (By.CSS_SELECTOR, "[ng-click='addCust()']")
     LCTR_FIELD_FIRST_NAME = (By.CSS_SELECTOR, "[placeholder='First Name']")
@@ -19,24 +23,30 @@ class Locators:
 
 
 class MainPage(BasePage):
-    '''Класс, описывающий главную страницу'''
+    """Класс, описывающий главную страницу"""
     def __init__(self, driver):
         url = URLS.URL_MAIN_PAGE
         super().__init__(driver, url)
 
-    def enter_word(self, locator, word):
-        '''Метод, позволяющий ввести данные в поле'''
+    def enter_word(self, locator: tuple[Any, str], word: str) -> WebElement:
+        """Метод, позволяющий ввести данные в поле"""
         search_field = self.click_element(locator)
         search_field.send_keys(word)
         return search_field
 
-    def open_tab_add_customer(self):
+    @allure.step("Клик по вкладке Add Customer")
+    def open_tab_add_customer(self) -> None:
+        """Метод, открывающий вкладку Add Customer"""
         self.click_element(Locators.LCTR_TAB_ADD_CUSTOMER)
 
-    def open_tab_customers(self):
+    @allure.step("Клик по вкладке Customers")
+    def open_tab_customers(self) -> None:
+        """Метод, открывающий вкладку Customers"""
         self.click_element(Locators.LCTR_TAB_CUSTOMERS)
 
-    def filling_fields(self):
+    @allure.step("Заполнение полей First Name, Last Name, Post Code и добавление клиента")
+    def add_customer(self) -> None:
+        """Метод, заполняющий поля First Name, Last Name, Post Code и добавляющий клиента"""
         post_code = get_post_code()
         first_name = get_first_name(post_code)
         last_name = first_name[::-1]
@@ -45,19 +55,23 @@ class MainPage(BasePage):
         self.enter_word(Locators.LCTR_FIELD_LAST_NAME, last_name)
         self.enter_word(Locators.LCTR_FIELD_POST_CODE, post_code)
 
-    def click_add_customer(self):
         self.click_element(Locators.LCTR_BTN_ADD_CUSTOMER)
 
-    def read_alert(self):
+    @allure.step("Считывание alert")
+    def read_alert(self) -> str:
+        """Метод, считывающий alert"""
         alert_obj = self.driver.switch_to.alert
         msg = alert_obj.text
         alert_obj.accept()
         return msg
 
-    def sort_by_first_name(self):
+    @allure.step("Сортировка таблицы Customers по полю First Name по убыванию")
+    def sort_by_first_name(self) -> None:
+        """Метод сортировки таблицы Customers по полю First Name по убыванию"""
         self.click_element(Locators.LCTR_SORT_FIRST_NAME)
 
     def get_customers_names(self) -> list[str]:
+        """Метод, считывающий имена из таблицы Customers"""
         locator = Locators.LCTR_CUSTOMERS_TABLE
         customers_names = []
 
@@ -69,7 +83,9 @@ class MainPage(BasePage):
 
         return customers_names
 
-    def delete_customer(self, name_to_delete):
+    @allure.step("Удаление клиента из таблицы Customers")
+    def delete_customer(self, name_to_delete) -> None:
+        """Метод, удаляющий клиента из таблицы Customers по имени"""
         locator = Locators.LCTR_CUSTOMERS_TABLE
 
         rows = len(self.find_elements((locator[0], f'{locator[1]}')))
@@ -81,21 +97,3 @@ class MainPage(BasePage):
                 delete_btn = self.find_element((locator[0], f'{locator[1]}[{r}]/td[{columns}]/button'))
                 delete_btn.click()
                 return
-
-
-    def get_customers_del_btns(self):
-        '''Метод, который считывает таблицу "Customer" и возвращает словарь,
-        в котором ключом является имя (First Name) клиента,
-        а значением - клавиша "Delete", удаляющая этого клиента из таблицы "Customer"'''
-        locator = Locators.LCTR_CUSTOMERS_TABLE
-        customers_del_btns = {}
-
-        rows = len(self.find_elements((locator[0], f'{locator[1]}')))
-        columns = len(self.find_elements((locator[0], f'{locator[1]}[1]/td')))
-
-        for r in range(1, rows + 1):
-            first_name = self.find_element((locator[0], f'{locator[1]}[{r}]/td[{1}]')).text
-            delete_btn = self.find_element((locator[0], f'{locator[1]}[{r}]/td[{columns}]/button'))
-            customers_del_btns[first_name] = delete_btn
-
-        return customers_del_btns
