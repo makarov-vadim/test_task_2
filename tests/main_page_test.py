@@ -11,18 +11,15 @@ from pages.main_page import MainPage
 @allure.feature("Test Cases")
 class TestsMainPage:
     """Класс, описывающий автотест страницы MainPage"""
-    def __init__(self, browser):
-        self.main_page = MainPage(browser)
-
     @allure.story("Создание клиента Add Customer")
-    def test_case_1(self, browser) -> None:
+    def test_case_1(self, browser, main_page) -> None:
         """Тест-кейс 1. Создание клиента (Add Customer)"""
         # main_page = MainPage(browser)
-        self.main_page.go_to_site()
+        main_page.go_to_site()
 
-        self.main_page.open_tab_add_customer()
-        self.main_page.add_customer()
-        alert_text = self.main_page.read_alert()
+        main_page.open_tab_add_customer()
+        main_page.add_customer()
+        alert_text = main_page.read_alert()
 
         assert bool(match(r'Customer added successfully', alert_text)), "Клиент не добавлен"
 
