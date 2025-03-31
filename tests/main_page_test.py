@@ -9,7 +9,6 @@ from pages.main_page import MainPage
 
 @allure.epic("TestsMainPage")
 @allure.feature("Test Cases")
-@pytest.mark.usefixtures("main_page")
 class TestsMainPage:
     """Класс, описывающий автотест страницы MainPage"""
     def __init__(self, browser):
