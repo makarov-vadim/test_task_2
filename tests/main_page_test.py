@@ -35,18 +35,18 @@ class TestsMainPage:
         sorted_names = sorted(customers_names, key=lambda name: name.lower(), reverse=True)
         assert sorted_names == customers_names, "Клиенты не отсортированы"
 
-    # @allure.story("Удаление клиента")
-    # def test_case_3(self, browser):
-    #     """Тест-кейс 3. Удаление клиента"""
-    #     main_page = MainPage(browser)
-    #
-    #     customers_names = main_page.get_customers_names()
-    #     name_to_delete = get_name_to_delete(customers_names)
-    #
-    #     main_page.delete_customer(name_to_delete)
-    #
-    #     assert name_to_delete not in main_page.get_customers_names(), f"Клиент {name_to_delete} не удален"
-    #
+    @allure.story("Удаление клиента")
+    def test_case_3(self, browser):
+        """Тест-кейс 3. Удаление клиента"""
+        main_page = MainPage(browser)
+
+        customers_names = main_page.get_customers_names()
+        name_to_delete = get_name_to_delete(customers_names)
+
+        main_page.delete_customer(name_to_delete)
+
+        assert name_to_delete not in main_page.get_customers_names(), f"Клиент {name_to_delete} не удален"
+
 
 
 
