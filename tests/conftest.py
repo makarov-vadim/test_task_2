@@ -17,6 +17,6 @@ def browser():
    browser.quit()
 
 @pytest.fixture(scope="session")
-def main_page():
-   main_page = MainPage
+def main_page(browser):
+   main_page = MainPage(browser)
    yield main_page
