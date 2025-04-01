@@ -13,6 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'microsoft'
+          java-version: '21'
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: setup Python
@@ -24,11 +28,20 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-#      - name: Install Selenium server
-#        run: sudo wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar &&
+      - name: Install Selenium server
+        run: mkdir /var/selenium/ && wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar /var/selenium/server.jar
+
+      - name: Start hub
+        run: java -jar /var/selenium/server.jar hab
+
+      - name: Start node_1
+        run: java -jar /var/selenium/server.jar node
+
+      - name: Start node_2
+        run: java -jar /var/selenium/server.jar node --port 6666
 
       - name: Run tests
-        run: pytest --alluredir reports
+        run: pytest --alluredir reports - n8
 
       - name: Store allure reports
         uses: actions/upload-artifact@v4
