@@ -31,10 +31,8 @@ jobs:
 #      - name: Install Selenium server
 #        run: wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar server.jar
 #
-#      - name: Start server
-#        run: java -jar server.jar
 #      - name: Start hub
-#        run: java -jar server.jar hub && java -jar server.jar node && java -jar server.jar node --port 6666
+#        run: java -jar server.jar hub
 #
 #      - name: Start node_1
 #        run: java -jar server.jar node
