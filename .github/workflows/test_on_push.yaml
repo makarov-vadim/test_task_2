@@ -28,11 +28,14 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Install Selenium server
-        run: wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar server.jar
+      - name: Start selenoid
+        uses: Xotabu4/selenoid-github-action@v2
 
-      - name: Start hub
-        run: java -jar server.jar hub && java -jar server.jar node && java -jar server.jar node --port 6666
+#      - name: Install Selenium server
+#        run: wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar server.jar
+#
+#      - name: Start hub
+#        run: java -jar server.jar hub && java -jar server.jar node && java -jar server.jar node --port 6666
 
 #      - name: Start node_1
 #        run: java -jar server.jar node
