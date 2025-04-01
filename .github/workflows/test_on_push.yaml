@@ -35,13 +35,13 @@ jobs:
         run: wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar server.jar
 
       - name: Start hub
-        run: java -jar /var/selenium/server.jar hab
+        run: java -jar server.jar hab
 
       - name: Start node_1
-        run: java -jar /var/selenium/server.jar node
+        run: java -jar server.jar node
 
       - name: Start node_2
-        run: java -jar /var/selenium/server.jar node --port 6666
+        run: java -jar server.jar node --port 6666
 
       - name: Run tests
         run: pytest --alluredir reports - n8
