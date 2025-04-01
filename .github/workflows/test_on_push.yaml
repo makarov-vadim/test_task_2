@@ -28,8 +28,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+#      - name: Install Selenium server
+#        run: mkdir /var/selenium/ && wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar /var/selenium/server.jar
+
       - name: Install Selenium server
-        run: mkdir /var/selenium/ && wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar /var/selenium/server.jar
+        run: wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar && mv selenium-server-4.30.0.jar server.jar
 
       - name: Start hub
         run: java -jar /var/selenium/server.jar hab
