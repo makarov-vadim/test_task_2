@@ -25,6 +25,8 @@ class TestsMainPage:
     @allure.story("Сортировка клиентов по имени First Name")
     def test_case_2(self, main_page) -> None:
         """Тест-кейс 2. Сортировка клиентов по имени (First Name)"""
+        main_page.go_to_site()
+
         main_page.open_tab_customers()
         main_page.sort_by_first_name()
 
@@ -35,6 +37,10 @@ class TestsMainPage:
     @allure.story("Удаление клиента")
     def test_case_3(self, main_page) -> None:
         """Тест-кейс 3. Удаление клиента"""
+        main_page.go_to_site()
+
+        main_page.open_tab_customers()
+
         customers_names = main_page.get_customers_names()
         name_to_delete = get_name_to_delete(customers_names)
 

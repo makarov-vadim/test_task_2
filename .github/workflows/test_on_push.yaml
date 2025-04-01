@@ -23,8 +23,13 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+#      - name: Install Selenium server
+#        run: sudo wget https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.30.0/selenium-server-4.30.0.jar &&
+
       - name: Run tests
         run: pytest --alluredir reports
+
       - name: Store allure reports
         uses: actions/upload-artifact@v4
         with:
