@@ -4,7 +4,7 @@ import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
-from config.config import URLS
+from config.config import UI_URLS
 from helpers.help_functions import get_first_name, get_post_code
 from pages.base_page import BasePage
 
@@ -25,7 +25,7 @@ class Locators:
 class MainPage(BasePage):
     """Класс, описывающий главную страницу"""
     def __init__(self, driver):
-        url = URLS.URL_MAIN_PAGE
+        url = UI_URLS.URL_MAIN_PAGE
         super().__init__(driver, url)
 
     def enter_word(self, locator: tuple[Any, str], word: str) -> WebElement:
