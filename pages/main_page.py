@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 
 from config.config import UI_URLS
-from helpers.help_functions import get_first_name, get_post_code
+from helpers.ui_helpers.ui_helper import get_first_name, get_post_code
 from pages.base_page import BasePage
 
 

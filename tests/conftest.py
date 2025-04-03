@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from pages.main_page import MainPage
-
+from api.requests.service_api import ServiceApi
 
 @pytest.fixture(scope="session")
 def browser():
@@ -34,3 +34,9 @@ def browser():
 def main_page(browser):
    main_page = MainPage(browser)
    yield main_page
+
+
+@pytest.fixture(scope="session")
+def service():
+    service = ServiceApi()
+    yield service
