@@ -5,7 +5,7 @@ import allure
 from helpers.ui_helpers.ui_helper import get_name_to_delete
 
 
-@allure.epic("TestsMainPage")
+@allure.epic("UI_Tests")
 @allure.feature("Test Cases")
 class TestsMainPage:
     """Класс, описывающий автотест страницы MainPage"""
