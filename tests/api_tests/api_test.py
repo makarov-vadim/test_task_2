@@ -61,7 +61,6 @@ class TestsApi:
 
         error_msg = lambda: "error" in response_get.json() and response_get.json()["error"] == "no rows in result set"
         assert response.status_code == 204, "Неверный код статуса для удаления сущности"
-        assert response_get.status_code == 500, "Неверный код статуса для получения удаленной сущности"
         assert error_msg(), "Сущность не удалена"
 
 

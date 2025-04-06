@@ -16,9 +16,9 @@ class ServiceApi(BaseApi):
         return self._request_post(url=API_URLS.POST_URL, json=data)
 
     @allure.step("Получение сущности")
-    def get_object(self, obj_id):
+    def get_object(self, object_id):
         """Метод, получающий сущность из сервиса"""
-        return self._request_get(url=API_URLS.GET_URL.format(obj_id))
+        return self._request_get(url=f"{API_URLS.GET_URL}{object_id}")
 
     @allure.step("Получение всех сущностей")
     def get_all_objects(self):
@@ -26,11 +26,11 @@ class ServiceApi(BaseApi):
         return self._request_get(url=API_URLS.GET_ALL_URL)
 
     @allure.step("Удаление сущности")
-    def delete_object(self, obj_id):
+    def delete_object(self, object_id):
         """Метод, удаляющий сущность на сервисе"""
-        return self._request_delete(url=API_URLS.DELETE_URL.format(obj_id))
+        return self._request_delete(url=f"{API_URLS.DELETE_URL}{object_id}")
 
     @allure.step("Обновление сущности")
-    def patch_object(self, obj_id, data):
+    def patch_object(self, object_id, data):
         """Метод, обновляющий сущность на сервисе"""
-        return self._request_patch(url=API_URLS.PATCH_URL.format(obj_id), json=data)
+        return self._request_patch(url=f"{API_URLS.PATCH_URL}{object_id}", json=data)
