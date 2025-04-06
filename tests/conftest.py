@@ -9,11 +9,11 @@ from pages.main_page import MainPage
 
 @pytest.fixture(scope="session")
 def browser():
-   options = Options()
-   options.add_argument('--headless')
-   browser = webdriver.Chrome(options=options)
-   yield browser
-   browser.quit()
+    options = Options()
+    options.add_argument('--headless')
+    browser = webdriver.Chrome(options=options)
+    yield browser
+    browser.quit()
 
 # @pytest.fixture(scope="session")
 # def browser():
@@ -31,8 +31,8 @@ def browser():
 
 @pytest.fixture(scope="session")
 def main_page(browser):
-   main_page = MainPage(browser)
-   yield main_page
+    main_page = MainPage(browser)
+    yield main_page
 
 
 @pytest.fixture(scope="session")
@@ -44,24 +44,21 @@ def service():
 
 @pytest.fixture(scope="session")
 def obj_id(service):
-   essence = get_essence()
-   response = service.post_object(essence.model_dump())
-   yield response.json()
-   service.delete_object(response.json())
+    essence = get_essence()
+    response = service.post_object(essence.model_dump())
+    yield response.json()
+    service.delete_object(response.json())
 
 
-# @pytest.fixture(scope="session")
-# def list_essences(service):
-#    list_obj_id = []
-#    essences = []
-#    for _ in range(3):
-#       essence = get_essence()
-#       response = service.post_object(essence.model_dump())
-#       list_obj_id.append(response)
-#       essences.append(essence)
-#
-#    yield essences
-#
-#    for obj_id in list_obj_id:
-#       service.delete_object(obj_id)
+@pytest.fixture(scope="session")
+def essences(service):
+    essences = {}
+    for _ in range(3):
+        essence = get_essence()
+        essence_id = service.post_object(essence.model_dump()).json()
+        essences[essence_id] = essence
 
+    yield list(essences.values())
+
+    for essence_id in essences:
+        service.delete_object(essence_id)
