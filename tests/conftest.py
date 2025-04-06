@@ -38,6 +38,7 @@ def main_page(browser):
 @pytest.fixture(scope="session")
 def service():
     service = ServiceApi()
+    service.delete_all_objects()
     yield service
 
 

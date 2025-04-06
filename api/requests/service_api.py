@@ -34,3 +34,11 @@ class ServiceApi(BaseApi):
     def patch_object(self, object_id, data):
         """Метод, обновляющий сущность на сервисе"""
         return self._request_patch(url=f"{API_URLS.PATCH_URL}{object_id}", json=data)
+
+    @allure.step("Удаление всех сущностей")
+    def delete_all_objects(self):
+        """Метод, удаляющий все сущности на сервисе"""
+        response_get_all = self.get_all_objects()
+        for entity in response_get_all.json()["entity"]:
+            entity_id = entity["id"]
+            self.delete_object(entity_id)

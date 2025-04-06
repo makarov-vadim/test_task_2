@@ -28,13 +28,15 @@ class TestsApi:
     def test_post(self, service):
         """Тест-кейс 3. Тестирование точки доступа POST"""
         essence = get_essence()
-        response = service.post_object(essence.model_dump())
 
+        response = service.post_object(essence.model_dump())
         response_get = service.get_object(response.json())
+        service.delete_object(response_get.json()["id"])
+
         essence_get = get_essence_from_response(response_get.json())
 
         assert response.status_code == 200, "Неверный код статуса для создания сущности"
-        assert response_get.status_code == 200, "Неверный код статуса для получения сущности"
+        assert response_get.status_code == 200, "Неверный код статуса для получения созданной сущности"
         assert essence == essence_get, "Несоответствие созданной и полученной сущности"
 
 
