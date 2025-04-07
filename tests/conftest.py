@@ -40,6 +40,7 @@ def service():
     service = ServiceApi()
     service.delete_all_objects()
     yield service
+    service.delete_all_objects()
 
 
 @pytest.fixture(scope="session")
@@ -51,7 +52,7 @@ def obj_id(service):
 
 
 @pytest.fixture(scope="session")
-def essences(service):
+def created_essences(service):
     essences = {}
     for _ in range(3):
         essence = get_essence()

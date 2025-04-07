@@ -7,23 +7,25 @@ from helpers.api_helpers.api_helper import get_essence, get_essence_from_respons
 @allure.feature("Test Cases")
 class TestsApi:
     """Класс, описывающий автотест страницы сервиса ServiceApi"""
-    @allure.story("Тестирование точки доступа GETALL")
-    def test_get_all(self, service, essences):
-        """Тест-кейс 1. Тестирование точки доступа GETALL"""
-        response = service.get_all_objects()
-        essences_from_response = [get_essence_from_response(entity) for entity in response.json()["entity"]]
-
-        assert response.status_code == 200, "Неверный код статуса для получения всех сущностей"
-        assert essences == essences_from_response, "Список полученных сущностей не совпадает со списком созданных"
-
-
     @allure.story("Тестирование точки доступа GET")
     def test_get(self, service, obj_id):
-        """Тест-кейс 2. Тестирование точки доступа GET"""
+        """Тест-кейс 1. Тестирование точки доступа GET"""
         response = service.get_object(obj_id)
 
         assert response.status_code == 200, "Неверный код статуса для получения сущности"
         assert response.json()["id"]== obj_id, "Несоответствие id созданной и полученной сущности"
+
+
+    @allure.story("Тестирование точки доступа GETALL")
+    def test_get_all(self, service, created_essences):
+        """Тест-кейс 2. Тестирование точки доступа GETALL"""
+        response = service.get_all_objects()
+        essences_from_response = [get_essence_from_response(entity) for entity in response.json()["entity"]]
+
+        is_created_essences_in_response = all(map(lambda essence: essence in essences_from_response, created_essences))
+
+        assert response.status_code == 200, "Неверный код статуса для получения всех сущностей"
+        assert is_created_essences_in_response, f"Созданных сущностей нет в списке полученных сущностей"
 
 
     @allure.story("Тестирование точки доступа POST")
