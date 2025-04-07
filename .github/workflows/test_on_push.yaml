@@ -25,7 +25,7 @@ jobs:
         uses: docker/setup-docker-action@v4
 
       - name: Activate service
-        run: cd simbirsoft_sdet_project && docker-compose up --build -d
+        run: cd simbirsoft_sdet_project && docker compose up --build -d
 
       - name: Checkout repository
         uses: actions/checkout@v4
