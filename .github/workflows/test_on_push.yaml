@@ -17,6 +17,16 @@ jobs:
         with:
           distribution: 'microsoft'
           java-version: '21'
+
+      - name: Clone service repository
+        run: git clone https://github.com/bondarenkokate73/simbirsoft_sdet_project.git
+
+      - name: Install Docker
+        uses: docker/setup-docker-action@v4
+
+      - name: Activate service
+        run: cd simbirsoft_sdet_project && docker-compose up --build -d
+
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: setup Python
@@ -40,8 +50,11 @@ jobs:
 #      - name: Start node_2
 #        run: java -jar server.jar node --port 6666
 
+#      - name: Run tests
+#        run: pytest tests/ui_tests/main_page_test.py --alluredir reports -n4
+
       - name: Run tests
-        run: pytest tests/ui_tests/main_page_test.py --alluredir reports -n8
+        run: pytest --alluredir reports -n4
 
       - name: Store allure reports
         uses: actions/upload-artifact@v4
