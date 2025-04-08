@@ -1,11 +1,12 @@
 # test_task_2
-Проект UI-автотестов по чек-листу, состоящему из 3 тест-кейсов
+Проект UI-автотестов и API-автотестов
 
-# Чек-лист
-Объект тестирования:  
+
+## UI-автотесты
+### Объект тестирования:  
 https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
 
-Чек-лист:  
+### Чек-лист:  
 1. Создание клиента (Add Customer)  
 При создании тестовых данных для полей Post Code и First Name необходимо:  
 1.1 для поля Post Code сгенерировать номер из 10 цифр  
@@ -24,5 +25,25 @@ https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager
 Пример: список имен - Albus, Neville, Voldemort. Длины имен – 5, 7, 9 соответственно.
 Среднее арифметическое длин – 7, удаляем имя Neville.
 
-# Тест-кейсы
-Описание тесткейсов находится в каталоге testcases
+### Тест-кейсы
+Описание тесткейсов находится в каталоге testcases/ui_testcases
+
+## API-автотесты
+### Объект тестирования:  
+Сервис, предоставляющий точки доступа для управления сущностями в базе данных PostgreSQL  
+
+- https://github.com/bondarenkokate73/simbirsoft_sdet_project  
+- HOST http://localhost:8080  
+- SWAGGER документация http://localhost:8080/api/_/docs/swagger/
+
+### Точки доступа API:  
+
+Создание сущности: POST /api/create  
+Удаление сущности: DELETE /api/delete/{id}  
+Получение сущности: GET /api/get/{id}  
+Получение всех сущностей: GET /api/getAll  
+Обновление сущности: PATCH /api/patch/{id}  
+
+
+### Тест-кейсы
+Описание тесткейсов находится в каталоге testcases/api_testcases
